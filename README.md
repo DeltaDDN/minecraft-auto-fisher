@@ -2,8 +2,6 @@
 
 Automatically fish in Minecraft
 
-[![Download icon](https://img.shields.io/badge/dynamic/json?color=brightgreen&label=Download&query=%24.tag_name&url=https%3A%2F%2Fapi.github.com%2Frepos%2Felias123tre%2Fminecraft-auto-fisher%2Freleases%2Flatest&style=for-the-badge)](https://github.com/elias123tre/minecraft-auto-fisher/releases/latest/download/fishing.exe)  
-(warning, big file size)
 
 ## How to use (simple)
 
