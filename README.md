@@ -8,10 +8,11 @@ I forked this because the original stopped working. I really don't know python, 
 
 ## How to use (simple) in Windows
 
-1. Double click the downloaded file
-2. Turn on subtitles in Minecraft and make sure language is English
-3. Start fishing - it will continue automatically
-4. Press `F12` to quit the program
+1. Fetch the "fishing.exe" file from Releases
+2. Double click the downloaded file
+3. Turn on subtitles in Minecraft and make sure language is English
+4. Start fishing - it will continue automatically
+5. Press `F12` to quit the program
 
 ## How to use with Python (advanced)
 
