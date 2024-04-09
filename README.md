@@ -11,8 +11,9 @@ I forked this because the original stopped working. I really don't know python, 
 1. Fetch the "fishing.exe" file from Releases
 2. Double click the downloaded file
 3. Turn on subtitles in Minecraft and make sure language is English
-4. Start fishing - it will continue automatically
-5. Press `F12` to quit the program
+4. Set Gui Size to '2' or muck about with the window size until it starts working
+5. Start fishing - it will continue automatically
+6. Press `F12` to quit the program
 
 ## How to use with Python (advanced)
 
