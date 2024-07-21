@@ -8,6 +8,7 @@ I forked this because the original stopped working for me on recent builds of Py
 
 2024-07-21 - Added timer functions so that the autofisher will attempt to restart if no splashes detected in 30s, and gives up after 5 minutes. Timer doesn't start until first splash detected.
 
+2024-07-21 - Minor adjustments - Splash timer increased to 35s from 30 to accomodate unenchanted rods, double-click (attempt to avoid hooking incoming items) changed from 0.5 to 1.5s, and remove unnecessary imports
 
 ## How to use (simple) in Windows
 

@@ -1,7 +1,6 @@
 """A python module to automaticaly fish in Minecraft"""
 import sys
 import time
-import base64
 
 import keyboard
 import pyautogui
@@ -10,7 +9,6 @@ import requests
 from base64 import b64decode
 from io import BytesIO
 from PIL import Image
-from datetime import datetime, timedelta
 
 pyautogui.useImageNotFoundException()
 
@@ -28,11 +26,11 @@ def main():
             while not keyboard.is_pressed("F12"):
                 if active:
                     timesince = time.time() - detectdt    # determine time since last 'splash'
-                    if ( failcount > 5 ):  # I can't think of any reason we need to retry for more than 3m. A broken fishing rod, death, etc. could stop fishing from happening, this makes sure we don't blindly right-click forever.
+                    if ( failcount > 5 ):  # I can't think of any reason we need to retry more than 5 times. A broken fishing rod, death, etc. could stop fishing from happening, this makes sure we don't blindly right-click forever.
                         pyautogui.alert('Last detected splash was {}s ago.\nIt\'s possible the player has a broken rod or died.\nThe program will now exit.'.format(int(timesince)),"Minecraft Auto Fisher - Error")
                         print("Exiting due to excessive time since last splash detection.")
                         sys.exit()
-                    if ( timesince > (30 * (1+failcount)) ): # minecraft should splash the bobber within 30s, if it's been more than that we right-click to cast the line
+                    if ( timesince > (35 * (1+failcount)) ): # minecraft wiki says 30s, but with unenchanted rods 35s seems more appropriate. If it's been more than that we right-click to cast the line
                          failcount += 1
                          print("Last splash was {}s ago. Attempting recast.".format(int(timesince)))
                          pyautogui.click(button='right')
@@ -46,11 +44,12 @@ def main():
                     failcount = 0
                     active = 1
                     detectdt = time.time()
-                    pyautogui.doubleClick(button='right', interval=0.5)
+                    pyautogui.doubleClick(button='right', interval=1.5) #increased from 0.5 to 1.5 to reduce instances where the cast catches an incoming item
                     time.sleep(5)  # Prevent from clicking again before gone
         except KeyboardInterrupt:
             print("F12 detected, exiting.")
             sys.exit()
+
 
 
 if __name__ == "__main__":
