@@ -2,9 +2,11 @@
 
 Automatically fish in Minecraft
 
-I forked this because the original stopped working. I really don't know python, and I don't know the proper way to use github. This is my best effort.
+I forked this because the original stopped working for me on recent builds of Python.
 
 2024-04-09 - Updated to work on Python 3.12, and embed the image-to-match (imgur no longer returns a PNG when querying the url)
+2024-07-21 - Added timer functions so that the autofisher will attempt to restart if no splashes detected in 30s, and gives up after 5 minutes. Timer doesn't start until first splash detected.
+
 
 ## How to use (simple) in Windows
 
