@@ -10,6 +10,8 @@ import requests
 from base64 import b64decode
 from io import BytesIO
 from PIL import Image
+from datetime import datetime, timedelta
+
 pyautogui.useImageNotFoundException()
 
 #embed original PNG file instead of attempting to fetch from web
@@ -17,21 +19,38 @@ myb64image = "iVBORw0KGgoAAAANSUhEUgAAAPsAAAAVCAYAAACAPJhUAAAE6UlEQVR4nO3a3VKrMB
 mybinimage = b64decode(myb64image)
 
 def main():
+    active = 0
+    failcount = 0
+    detectdt = time.time()
     with Image.open(BytesIO(mybinimage)) as image:
         print("Press F12 to quit the program")
         try:
             while not keyboard.is_pressed("F12"):
-                try: 
+                if active:
+                    timesince = time.time() - detectdt    # determine time since last 'splash'
+                    if ( failcount > 5 ):  # I can't think of any reason we need to retry for more than 3m. A broken fishing rod, death, etc. could stop fishing from happening, this makes sure we don't blindly right-click forever.
+                        pyautogui.alert('Last detected splash was {}s ago.\nIt\'s possible the player has a broken rod or died.\nThe program will now exit.'.format(int(timesince)),"Minecraft Auto Fisher - Error")
+                        print("Exiting due to excessive time since last splash detection.")
+                        sys.exit()
+                    if ( timesince > (30 * (1+failcount)) ): # minecraft should splash the bobber within 30s, if it's been more than that we right-click to cast the line
+                         failcount += 1
+                         print("Last splash was {}s ago. Attempting recast.".format(int(timesince)))
+                         pyautogui.click(button='right')
+                try:
                     loc = pyautogui.locateOnScreen(image, grayscale=True, confidence=0.9)
                 except pyautogui.ImageNotFoundException:
                     loc = None
+
                 if loc:
                     print("Fishing Bobber splashed!")
+                    failcount = 0
+                    active = 1
+                    detectdt = time.time()
                     pyautogui.doubleClick(button='right', interval=0.5)
                     time.sleep(5)  # Prevent from clicking again before gone
         except KeyboardInterrupt:
+            print("F12 detected, exiting.")
             sys.exit()
-
 
 
 if __name__ == "__main__":
