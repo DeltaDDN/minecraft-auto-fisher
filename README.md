@@ -2,20 +2,22 @@
 
 Automatically fish in Minecraft
 
-I forked this because the original stopped working for me on recent builds of Python.
+I forked this because the original stopped working for me on recent builds of Python. I've since been poking at it to make it more reliable and add some features.
 
-2024-04-09 - Updated to work on Python 3.12, and embed the image-to-match (imgur no longer returns a PNG when querying the url)
+2024-04-09 - Updated to work on Python 3.12, and embed the image-to-match (because imgur no longer returns a PNG when querying the original url)
 
 2024-07-21 - Added timer functions so that the autofisher will attempt to restart if no splashes detected in 30s, and gives up after 5 minutes. Timer doesn't start until first splash detected.
 
 2024-07-21 - Minor adjustments - Splash timer increased to 35s from 30 to accomodate unenchanted rods, double-click (attempt to avoid hooking incoming items) changed from 0.5 to 1.5s, and remove unnecessary imports
+
+2024-07-24 - Replace the exit-on-no-catch functionality & replace with a switch back to 'idle' mode, autoreactivating when new splash detected. Reduce retry attempts to 4 (based on overnight testing) - new release not generated.
 
 ## How to use (simple) in Windows
 
 1. Fetch the "fishing.exe" file from Releases
 2. Double click the downloaded file
 3. Turn on subtitles in Minecraft and make sure language is English
-4. Set Gui Size to '2' or muck about with the window size until it starts working
+4. Set Gui Size to '2' or muck about with the window size until it starts working (the subtitle text size needs to match the expected size)
 5. Start fishing - it will continue automatically
 6. Press `F12` to quit the program
 
@@ -23,5 +25,5 @@ I forked this because the original stopped working for me on recent builds of Py
 
 1. Make sure you have Python 3.12 or greater installed and accesible from the command-line
 2. download fishing.py from this repo
-3. 3. Run `python fishing.py` in the directory where the script was downloaded
+3. Run `python fishing.py` in the directory where the script was downloaded
 4. (Bonus) Compile to an executable: create a virtualenv, install requirements.txt, `pyinstaller --onefile fishing.py`
