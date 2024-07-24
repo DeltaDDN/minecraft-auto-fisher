@@ -17,6 +17,7 @@ myb64image = "iVBORw0KGgoAAAANSUhEUgAAAPsAAAAVCAYAAACAPJhUAAAE6UlEQVR4nO3a3VKrMB
 mybinimage = b64decode(myb64image)
 
 def main():
+    tbswitching = 1
     active = 0
     failcount = 0
     detectdt = time.time()
@@ -31,9 +32,11 @@ def main():
                         active = 0
                     if ( timesince > (35 * (1+failcount) ) ) and active: # minecraft wiki says 30s, but with unenchanted rods 35s seems more appropriate. If it's been more than that we right-click to cast the line
                          failcount += 1
-                         print("Last splash was {}s ago. Attempting recast.".format(int(timesince)))
-# uncomment to enable itembar switching on 'fail'
-#                         pyautogui.scroll(200)
+                         if (failcount > 2) and tbswitching: #try 'just' recasting twice. Based on prior testing, this is needed when the player inventory is full and the rod hooks loose items.
+                             print("Last splash was {}s ago. Cycling toolbar item and attempting recast.".format(int(timesince)))
+                             pyautogui.scroll(200)
+                         else:
+                             print("Last splash was {}s ago. Attempting recast.".format(int(timesince)))
                          time.sleep(1)
                          pyautogui.click(button='right')
                 try:
