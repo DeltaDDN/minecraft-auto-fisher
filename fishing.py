@@ -27,7 +27,7 @@ def main():
                 if active:
                     timesince = time.time() - detectdt    # determine time since last 'splash'
                     if ( failcount > 3 ):  # I can't think of any reason we need to retry more than 4 times. A broken fishing rod, death, etc. could stop fishing from happening, this makes sure we don't blindly right-click forever.
-                        print('Last detected splash was {}s ago.\nIt\'s possible the player has a broken rod or died.\nThe program will now pause until a new splash is detected.'.format(int(timesince)),"Minecraft Auto Fisher - Error")
+                        print('Last detected splash was {}s ago.\nIt\'s possible the player has a broken rod or died.\nThe program will now pause until a new splash is detected.'.format(int(timesince)))
                         active = 0
                     if ( timesince > (35 * (1+failcount) ) ) and active: # minecraft wiki says 30s, but with unenchanted rods 35s seems more appropriate. If it's been more than that we right-click to cast the line
                          failcount += 1
